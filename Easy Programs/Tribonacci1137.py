@@ -24,10 +24,22 @@
 # Answer:
 
 class Solution(object):
-    def tribonacci(self, n):
-        if n==0:
-            return 0
-        if n==1 or n==2:
-            return 1
-        return (self.tribonacci(n-1)+self.tribonacci(n-2)+self.tribonacci(n-3))
+
+    def tribonacci(self, n, dp={}):
         
+        if n == 0:
+            return 0
+        
+        if n == 1 or n == 2:
+            return 1
+
+        if n in dp:
+            return dp[n]
+
+        dp[n] = (
+            self.tribonacci(n-1, dp) +
+            self.tribonacci(n-2, dp) +
+            self.tribonacci(n-3, dp)
+        )
+
+        return dp[n]
